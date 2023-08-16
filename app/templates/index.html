@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block header %}
+    <h1>Black Book</h1>
+    <h5>Click the link to add a contact!</h5>
+    <a href={{ url_for('add_contact') }}>Add a contact</a>
+{% endblock header %}
+
+{% block content %}
+    <div class="col-12">
+        <h5>Future implementation will display address book table here</h5>
+       
+{% endblock content %}
+
