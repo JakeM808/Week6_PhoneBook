@@ -53,20 +53,11 @@ def add_contact():
         address = form.address.data
         phone_number = form.phone.data
        
-
-        # Check User table to see if there are any users with username or email
-        # check_user = db.session.execute(db.select(User).where( (User.username==username) | (User.email==email) )).scalar()
-        # if check_user:
-        #     print('A user with that username/password already exists')
-        #     return redirect(url_for('signup'))
-        # Create a new instance of the User class with data from form
-        # new_user = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
-
-        new_contact = Contact(first_name=first_name, last_name=last_name, email=email, address=address, phone=phone_number)
+        new_contact = Contact(first_name=first_name, last_name=last_name, email=email, address=address, phone=phone_number, user_id=current_user.id)
         # Add the new_user object to the database
         db.session.add(new_contact)
         db.session.commit()
-        flash(f"{new_contact.title} has been created", 'primary')
+        flash(f"{new_contact.first_name} has been created", 'primary')
         # redirect back to the home page
         return redirect(url_for('index'))
     
@@ -84,7 +75,7 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-        print(username, password)
+        # print(username, password)
         # Query the User table for a user with that username
         user = db.session.execute(db.select(User).where(User.username==username)).scalar()
         # If we have a user AND the password is correct for that user

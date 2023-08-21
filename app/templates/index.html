@@ -14,3 +14,39 @@
        
 {% endblock content %}
 
+
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block header %}
+    <h1>The Phone Book</h1>
+    {% if current_user.is_authenticated %}
+        <h4>Hello {{ current_user.first_name }}!</h4>
+    {% else %}
+        <h4>Please Sign Up or Log In to use the phone book</h4>
+    {% endif %}
+{% endblock header %}
+
+{% block content %}
+ <div class="col-12">
+    {% for contact in contacts %}
+        <div class="card my-3 bg-primary-subtle border-danger-subtle">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ post.image_url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ contact.first_name }}</h5>
+                    <h6 class="card-subtle">By: {{post.author.username }}</h6>
+                    <p class="card-text">{{ post.body }}</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+ </div>
+{% endblock content %}
+new_contact = Contact(first_name=first_name, last_name=last_name, email=email, address=address, phone=phone_number, user_id=current_user.id)
