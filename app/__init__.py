@@ -18,6 +18,13 @@ migrate = Migrate(app, db)
 
 # Create an instance of LoginManager to handle authentication
 login = LoginManager(app)
+login.login_view = 'login'
+login.login_message = 'Hey you need to be logged in to do that!'
+login.login_message_category = 'info'
+
+# register the api blueprint with our app
+from app.blueprints.api import api
+app.register_blueprint(api)
 
 # import all of the routes from the routes file into the current package
 from app import routes, models
